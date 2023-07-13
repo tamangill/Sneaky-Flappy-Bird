@@ -1,0 +1,39 @@
+module ScoreDisplay (
+  input wire clk,
+  input wire reset,
+  output wire [6:0] hex0,
+  output wire [6:0] hex1,
+  output wire [6:0] hex2
+);
+
+  wire [11:0] score;  // Signal to hold the score value
+
+  // Instantiate the Score module to count the score
+  Score score_counter (
+    .clk(clk),
+    .reset(reset),
+    .score(score)
+  );
+
+  // Split the score value into three parts (least significant digit, middle digit, and most significant digit)
+  wire [3:0] bcd2 = score[3:0];     // Least significant digit BCD
+  wire [3:0] bcd1 = score[7:4];     // Middle digit BCD
+  wire [3:0] bcd0 = score[11:8];    // Most significant digit BCD
+
+  // Instantiate seg7 modules for each hex display
+  seg7 segment_decoder0 (
+    .bcd(bcd0),          // Connect most significant digit BCD to seg7 module
+    .leds(hex0)          // Connect decoded segments to HEX0 display
+  );
+
+  seg7 segment_decoder1 (
+    .bcd(bcd1),          // Connect middle digit BCD to seg7 module
+    .leds(hex1)          // Connect decoded segments to HEX1 display
+  );
+
+  seg7 segment_decoder2 (
+    .bcd(bcd2),          // Connect least significant digit BCD to seg7 module
+    .leds(hex2)          // Connect decoded segments to HEX2 display
+  );
+
+endmodule 

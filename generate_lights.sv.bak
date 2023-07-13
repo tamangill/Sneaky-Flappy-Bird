@@ -1,0 +1,7 @@
+module generate_lights(
+	input logic clk,
+	input logic reset, 
+); 
+
+
+endmodule 

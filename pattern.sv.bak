@@ -1,0 +1,12 @@
+module patternNumber(clk, pattern);
+	
+	output logic [2:0] pattern; 
+	input logic clk; 
+	
+	
+
+	always_ff @(posedge clk)
+		begin
+		pattern <= {pattern[2:0], ~pattern[2] ^ pattern[1]};
+		end 
+endmodule 

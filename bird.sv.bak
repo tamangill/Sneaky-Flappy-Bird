@@ -1,0 +1,72 @@
+module generate_lights(
+	input logic clk,
+	input logic reset,
+	input logic  [15:0][15:0] GrnPixels,
+	input logic up,
+	output logic isDead, 
+	output logic [15:0][15:0] RedPixels
+	
+);  
+
+	enum logic [3:0] {S0 = 4'b0000, S1 = 4'b0001, S2 = 4'b0010, S3 = 4'b0011, S4 = 4'b0100, S5 = 4'b0101, S6 = 4'b0110, S7 = 4'b0111, S8 = 4'b1000, S9 = 4'b1001, S10 = 4'b1010,S11 = 4'b1011, S12 = 4'b1100, S13 = 4'b1101, S14 = 4'b1110, S15 = 4'b1111} ps, ns;
+	assign out = (ns == S0);
+	
+	always_comb begin
+	begin
+		case(ps)
+		S7:
+		begin
+		  RedPixels[00] = {3'b000,1'b0, 12'b000000000000};
+		  RedPixels[01] = {3'b000,1'b0, 12'b000000000000};
+		  RedPixels[02] = {3'b000,1'b0, 12'b000000000000};
+		  RedPixels[03] = {3'b000,1'b0, 12'b000000000000};
+		  RedPixels[04] = {3'b000,1'b0, 12'b000000000000};
+		  RedPixels[05] = {3'b000,1'b0, 12'b000000000000};
+		  RedPixels[06] = {3'b000,1'b0, 12'b000000000000};
+	     RedPixels[07] = {3'b000,1'b1, 12'b000000000000};
+	     RedPixels[08] = {3'b000,1'b0, 12'b000000000000};
+	     RedPixels[09] = {3'b000,1'b0, 12'b000000000000};
+		  RedPixels[10] = {3'b000,1'b0,12'b000000000000};
+	     RedPixels[11] = {3'b000,1'b0,12'b000000000000};
+		  RedPixels[12] = {3'b000,1'b0,12'b000000000000};
+		  RedPixels[13] = {3'b000,1'b0,12'b000000000000};
+		  RedPixels[14] = {3'b000,1'b0,12'b000000000000};
+		  RedPixels[15] = {3'b000,1'b0,12'b000000000000};
+		  if(up) begin 
+			ns = S6
+		  end 
+		  else
+		  begin
+			ns = S8
+		  end
+		  
+		end 
+		
+		end 
+		endcase  
+end
+  always_ff @(posedge clk)
+    if (reset)
+      ps <= S0;
+    else
+      ps <= ns;
+
+	
+endmodule 
+
+		  RedPixels[00] = {3'b000,output_data[0], output_data[0],output_data[0], 10'b0000000000};
+		  RedPixels[01] = {3'b000,output_data[1], output_data[1],output_data[1], 10'b0000000000};
+		  RedPixels[02] = {3'b000,output_data[2], output_data[2],output_data[2], 10'b0000000000};
+		  RedPixels[03] = {3'b000,output_data[3], output_data[3],output_data[3], 10'b0000000000};
+		  RedPixels[04] = {3'b000,output_data[4], output_data[4],output_data[4], 10'b0000000000};
+		  RedPixels[05] = {3'b000,output_data[5], output_data[5],output_data[5], 10'b0000000000};
+		  RedPixels[06] = {3'b000,output_data[6], output_data[6],output_data[6], 10'b0000000000};
+	     RedPixels[07] = {3'b000,output_data[7], output_data[7],output_data[7], 10'b0000000000};
+	     RedPixels[08] = {3'b000,output_data[8], output_data[8],output_data[8], 10'b0000000000};
+	     RedPixels[09] = {3'b000,output_data[9], output_data[9],output_data[9], 10'b0000000000};
+		  RedPixels[10] = {3'b000,output_data[10], output_data[10],output_data[10], 10'b0000000000};
+	     RedPixels[11] = {3'b000,output_data[11], output_data[11],output_data[11], 10'b0000000000};
+		  RedPixels[12] = {3'b000,output_data[12], output_data[12],output_data[12], 10'b0000000000};
+		  RedPixels[13] = {3'b000,output_data[13], output_data[13],output_data[13], 10'b0000000000};
+		  RedPixels[14] = {3'b000,output_data[14], output_data[14],output_data[14], 10'b0000000000};
+		  RedPixels[15] = {3'b000,output_data[15], output_data[15],output_data[15], 10'b0000000000};
